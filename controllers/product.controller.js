@@ -1,9 +1,13 @@
-const Product = require('../')
+const Product = require('../models/product.model')
 
 exports.getProducts = async (req, res, next) => {
-    Product.findAll()
+    Product.find()
     .then((products) => {
-        res.send(products)
+        let productArr = [];
+        products.forEach((data) => {
+            data.push(productArr)
+        })
+        res.send(productArr)
     }).catch((err)=> {
         console.log(err)
         next
